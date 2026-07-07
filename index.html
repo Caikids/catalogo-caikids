@@ -179,4 +179,102 @@
   </div>
 </div>
 
-<button class="nav-btn prev" id="btnPrev" aria-label="Página
+<button class="nav-btn prev" id="btnPrev" aria-label="Página anterior">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<button class="nav-btn next" id="btnNext" aria-label="Próxima página">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+</button>
+
+<div class="thumb-strip" id="thumbStrip"></div>
+
+<div class="bottom-bar">
+  <div class="brand-mini">
+    <span class="full">CAIKIDS · CATÁLOGO 2026</span>
+  </div>
+  <div class="page-counter" id="pageCounter">1 / 14</div>
+  <button class="thumb-toggle" id="thumbToggle">PÁGINAS</button>
+</div>
+
+<script>
+  const TOTAL_PAGES = 14;
+  const labels = [
+    'Capa', 'Meninos', 'Blusa Moletom', 'Calça Moletom', 'Camisetas', 'Bermudas',
+    'Meninas', 'Blusa Moletom', 'Calça Moletom',
+    'Adulto', 'Blusa Moletom', 'Calça Moletom', 'Camiseta', 'Bermuda'
+  ];
+
+  let current = 0;
+  const frame = document.getElementById('pageFrame');
+  const counter = document.getElementById('pageCounter');
+  const progressFill = document.getElementById('progressFill');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const thumbStrip = document.getElementById('thumbStrip');
+  const thumbToggle = document.getElementById('thumbToggle');
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function goTo(index){
+    if(index < 0 || index >= TOTAL_PAGES) return;
+    current = index;
+    frame.src = 'pages/page-' + pad(current) + '.html';
+    counter.textContent = (current + 1) + ' / ' + TOTAL_PAGES;
+    progressFill.style.width = ((current + 1) / TOTAL_PAGES * 100) + '%';
+    btnPrev.classList.toggle('disabled', current === 0);
+    btnNext.classList.toggle('disabled', current === TOTAL_PAGES - 1);
+    document.querySelectorAll('.thumb-item').forEach((el, i) => {
+      el.classList.toggle('active', i === current);
+    });
+  }
+
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight') goTo(current + 1);
+    if(e.key === 'ArrowLeft') goTo(current - 1);
+    if(e.key === 'Escape') thumbStrip.classList.remove('open');
+  });
+
+  // build thumbnail strip
+  labels.forEach((label, i) => {
+    const el = document.createElement('div');
+    el.className = 'thumb-item' + (i === 0 ? ' active' : '');
+    el.textContent = (i + 1) + '. ' + label;
+    el.addEventListener('click', () => { goTo(i); thumbStrip.classList.remove('open'); });
+    thumbStrip.appendChild(el);
+  });
+
+  thumbToggle.addEventListener('click', () => {
+    thumbStrip.classList.toggle('open');
+  });
+
+  // swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 50){
+      if(dx < 0) goTo(current + 1);
+      else goTo(current - 1);
+    }
+  }, {passive:true});
+
+  goTo(0);
+
+  // scale the fixed 1600x900 stage to fit any screen size, centered
+  const stage = document.querySelector('.stage');
+  function updateScale(){
+    const availW = window.innerWidth;
+    const availH = window.innerHeight - 56; // leave room for bottom bar
+    const scale = Math.min(availW / 1600, availH / 900);
+    stage.style.transform = 'scale(' + scale + ')';
+  }
+  window.addEventListener('resize', updateScale);
+  updateScale();
+
+</script>
+
+</body>
+</html>
