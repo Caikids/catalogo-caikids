@@ -197,11 +197,19 @@
 </div>
 
 <script>
-  const TOTAL_PAGES = 14;
+  const TOTAL_PAGES = 21;
   const labels = [
-    'Capa', 'Meninos', 'Blusa Moletom', 'Calça Moletom', 'Camisetas', 'Bermudas',
-    'Meninas', 'Blusa Moletom', 'Calça Moletom',
-    'Adulto', 'Blusa Moletom', 'Calça Moletom', 'Camiseta', 'Bermuda'
+    'Capa',
+    'Meninos · Blusa Moletom', 'Blusa Moletom (ficha)',
+    'Meninos · Calça', 'Calça (ficha)',
+    'Meninos · Camisetas', 'Camisetas (ficha)',
+    'Meninos · Bermudas', 'Bermudas (ficha)',
+    'Meninas · Blusa Moletom', 'Blusa Moletom (ficha)',
+    'Meninas · Calça', 'Calça (ficha)',
+    'Adulto · Blusa Moletom', 'Blusa Moletom (ficha)',
+    'Adulto · Calça', 'Calça (ficha)',
+    'Adulto · Camiseta', 'Camiseta (ficha)',
+    'Adulto · Bermuda', 'Bermuda (ficha)'
   ];
 
   let current = 0;
@@ -273,6 +281,14 @@
   }
   window.addEventListener('resize', updateScale);
   updateScale();
+
+  // listen for direct navigation requests from the cover page menu (iframe)
+  window.addEventListener('message', function(e){
+    if(e.data && e.data.type === 'caikids-goto' && typeof e.data.page === 'number'){
+      goTo(e.data.page);
+    }
+  });
+
 
 </script>
 
