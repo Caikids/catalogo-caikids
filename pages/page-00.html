@@ -159,6 +159,19 @@
   }
   .footer-line .line{ width:70px; height:1.5px; background:rgba(241,234,217,0.5); }
   .footer-line .txt{ color:#e5dfc9; font-size:12px; font-weight:700; letter-spacing:3px; }
+
+  @media (max-width:700px){
+    html,body{ width:100%; height:auto; min-height:100vh; overflow-x:hidden; overflow-y:auto; }
+    .page{ width:100%; height:auto; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:48px 24px 56px; }
+    .top-row{ position:static; transform:none; margin:0; }
+    .top-row img{ width:96px; height:96px; }
+    .titleblock{ position:static; transform:none; margin-top:24px; text-align:center; }
+    h1{ font-size:58px; }
+    .sub{ max-width:280px; }
+    .nav-menu{ position:static; transform:none; flex-direction:column; gap:16px; width:100%; max-width:340px; margin-top:36px; }
+    .nav-category{ width:100%; }
+    .footer-line{ position:static; transform:none; margin-top:40px; }
+  }
 </style>
 </head>
 <body>
@@ -189,15 +202,16 @@
     <div class="nav-category" data-cat="meninas">
       <button class="cat-btn" type="button">MENINAS</button>
       <div class="subcat-list">
-        <button class="subcat-btn" data-page="9" type="button">Moletom</button>
+        <button class="subcat-btn" data-page="9" type="button">Blusa Moletom</button>
         <button class="subcat-btn" data-page="11" type="button">Calça</button>
       </div>
     </div>
     <div class="nav-category" data-cat="adulto">
       <button class="cat-btn" type="button">ADULTO</button>
       <div class="subcat-list">
-        <button class="subcat-btn" data-page="17" type="button">Camiseta</button>
         <button class="subcat-btn" data-page="13" type="button">Blusa Moletom</button>
+        <button class="subcat-btn" data-page="15" type="button">Calça</button>
+        <button class="subcat-btn" data-page="17" type="button">Camiseta</button>
         <button class="subcat-btn" data-page="19" type="button">Bermuda</button>
       </div>
     </div>

@@ -189,6 +189,18 @@
     color:#8a8368;
     font-weight:500;
   }
+
+  @media (max-width:700px){
+    html,body{ width:100%; height:auto; min-height:100vh; overflow-x:hidden; overflow-y:auto; }
+    .page{ width:100%; height:auto; min-height:100vh; overflow:visible; padding:32px 20px 56px; }
+    .rail{ display:none; }
+    .header{ position:static; flex-direction:column; align-items:flex-start; gap:10px; }
+    .header .name{ font-size:28px; }
+    .photo-main{ position:static; height:auto; width:100%; max-width:320px; display:block; margin:24px auto 0; }
+    .photo-inset{ position:static; height:auto; width:60%; max-width:220px; display:block; margin:20px auto 0; }
+    .photo-inset-label{ position:static; text-align:center; margin-top:8px; }
+    .info{ position:static; width:100%; margin-top:32px; }
+  }
 </style>
 </head>
 <body>
@@ -221,6 +233,14 @@
 <div class="size-chip">10</div>
 <div class="size-chip">12</div>
 <div class="size-chip">14</div>
+    </div>
+
+    <div class="price-table">
+      <div class="price-row">
+        <div class="qty">Preço</div>
+        <div class="val">R$ 149,90</div>
+      </div>
+      <div class="price-note">*Preço especial no pix</div>
     </div>
   </div>
 </div>
