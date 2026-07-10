@@ -189,6 +189,20 @@
     color:#8a8368;
     font-weight:500;
   }
+
+  @media (max-width:700px){
+    html,body{ width:100%; height:auto; min-height:100vh; overflow-x:hidden; overflow-y:auto; }
+    .page{ width:100%; height:auto; min-height:100vh; overflow:visible; padding:32px 20px 56px; }
+    .rail{ display:none; }
+    .header{ position:static; flex-direction:column; align-items:flex-start; gap:10px; }
+    .header .name{ font-size:28px; }
+    .photo-main{ position:static; height:auto; width:100%; max-width:320px; display:block; margin:24px auto 0; }
+    .photo-inset{ position:static; height:auto; width:60%; max-width:220px; display:block; margin:20px auto 0; }
+    .photo-inset-label{ position:static; text-align:center; margin-top:8px; }
+    .photo-placeholder{ position:static; width:100%; max-width:320px; height:280px; margin:24px auto 0; }
+    .info{ position:static; width:100%; margin-top:32px; }
+    .colors-row{ flex-wrap:wrap; }
+  }
 </style>
 </head>
 <body>
